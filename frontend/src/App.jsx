@@ -17,10 +17,6 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/upload' element={<CertificateUpload/>}/>
         <Route path='/about' element={<About/>}/>
-
-        {/* <Link to="/upload">Upload Certificates</Link>
-      <Link to="/manage">Manage Certificates</Link>
-      <Link to="/about">About</Link> */}
       </Routes>
     </Router>
   );

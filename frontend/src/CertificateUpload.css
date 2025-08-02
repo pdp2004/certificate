@@ -1,0 +1,83 @@
+/* Reset & Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f7fa;
+}
+
+/* Upload Container */
+.upload-container {
+  max-width: 80%;
+  margin-left: 20%;
+  background: #ffffff;
+  padding: 20px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Heading */
+.upload-container h2 {
+  margin-bottom: 25px;
+  color: #1f2937;
+  font-size: 28px;
+  text-align: center;
+}
+
+/* Labels */
+.upload-container label {
+  display: block;
+  margin-bottom: 8px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* Inputs */
+.upload-container input[type="text"],
+.upload-container input[type="date"] {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  background-color: #f9fafb;
+  transition: border-color 0.2s ease;
+}
+
+.upload-container input:focus {
+  border-color: #3b82f6;
+  outline: none;
+  background-color: #ffffff;
+}
+
+/* Button */
+.upload-container .btn {
+  margin-top: 30px;
+  width: 100%;
+  padding: 14px 0;
+  background-color: #2563eb;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-container .btn:hover {
+  background-color: #1e40af;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .upload-container {
+    padding: 30px 20px;
+  }
+
+  .upload-container h2 {
+    font-size: 24px;
+  }
+}

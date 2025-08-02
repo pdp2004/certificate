@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import "./Dashboard.css";
+import React, { useState } from 'react';
+import './CertificateUpload.css';
 
-const Dashboard = () => {
+const CertificateUpload = () => {
+
   const [certificates, setCertificates] = useState([]);
   const [form, setForm] = useState({
     studentName: "",
@@ -28,13 +29,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="admin-container">
-      {/* Main Content */}
-      <div className="main">
-        <h1>Admin Dashboard</h1>
-
-        {/* Upload Form */}
-        <div className="form-section">
+    <div className="upload-container">
+      {/* Upload Form */}
+      <div className="form-section">
           <h2>Upload New Certificate</h2>
           <form onSubmit={uploadCertificate}>
             <label>Student Name</label>
@@ -76,36 +73,8 @@ const Dashboard = () => {
             <button type="submit" className="btn">Upload</button>
           </form>
         </div>
-
-        {/* Issued Certificates */}
-        <div className="table-section">
-          <h2>Issued Certificates</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Certificate ID</th>
-                <th>Student Name</th>
-                <th>Course</th>
-                <th>Issue Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {certificates.map((cert, index) => (
-                <tr key={index}>
-                  <td>{cert.certId}</td>
-                  <td>{cert.studentName}</td>
-                  <td>{cert.course}</td>
-                  <td>{cert.issueDate}</td>
-                  <td>{cert.status}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default CertificateUpload;

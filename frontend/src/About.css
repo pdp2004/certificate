@@ -7,31 +7,8 @@
   
   .about-container {
     display: flex;
+    margin-left: 25%;
     height: 100vh;
-    background-color: #f5f5f5;
-  }
-  
-  /* Sidebar */
-  .sidebar {
-    width: 220px;
-    background-color: #007bff;
-    color: #fff;
-    padding-top: 20px;
-  }
-  .sidebar h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 20px;
-  }
-  .sidebar a {
-    display: block;
-    padding: 12px 20px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  .sidebar a:hover {
-    background-color: #0056b3;
   }
   
   /* Main content */
