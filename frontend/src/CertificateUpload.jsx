@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import './CertificateUpload.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./CertificateUpload.css";
 
 const CertificateUpload = () => {
-
-  const [certificates, setCertificates] = useState([]);
   const [form, setForm] = useState({
     studentName: "",
     course: "",
@@ -15,64 +14,64 @@ const CertificateUpload = () => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
 
-  const uploadCertificate = (e) => {
+  const uploadCertificate = async (e) => {
     e.preventDefault();
-    const certId = "CERT-" + Math.floor(Math.random() * 100000);
-    const newCert = {
-      certId,
-      ...form,
-      status: "On-chain",
-    };
-    setCertificates([...certificates, newCert]);
-    setForm({ studentName: "", course: "", grade: "", issueDate: "" });
-    alert(`Certificate uploaded successfully with ID: ${certId}`);
+    try {
+      const res = await axios.post("http://localhost:3000/api/certificates", form);
+      alert(`Certificate uploaded successfully with ID: ${res.data.certId}`);
+      setForm({ studentName: "", course: "", grade: "", issueDate: "" });
+
+      // Optional: Reload dashboard if needed (e.g. with useContext or state lifting)
+    } catch (err) {
+      alert("Error uploading certificate");
+      console.error(err);
+    }
   };
 
   return (
     <div className="upload-container">
-      {/* Upload Form */}
       <div className="form-section">
-          <h2>Upload New Certificate</h2>
-          <form onSubmit={uploadCertificate}>
-            <label>Student Name</label>
-            <input
-              type="text"
-              id="studentName"
-              value={form.studentName}
-              onChange={handleChange}
-              required
-            />
+        <h2>Upload New Certificate</h2>
+        <form onSubmit={uploadCertificate}>
+          <label>Student Name</label>
+          <input
+            type="text"
+            id="studentName"
+            value={form.studentName}
+            onChange={handleChange}
+            required
+          />
 
-            <label>Course</label>
-            <input
-              type="text"
-              id="course"
-              value={form.course}
-              onChange={handleChange}
-              required
-            />
+          <label>Course</label>
+          <input
+            type="text"
+            id="course"
+            value={form.course}
+            onChange={handleChange}
+            required
+          />
 
-            <label>Grade</label>
-            <input
-              type="text"
-              id="grade"
-              value={form.grade}
-              onChange={handleChange}
-              required
-            />
+          <label>Grade</label>
+          <input
+            type="text"
+            id="grade"
+            value={form.grade}
+            onChange={handleChange}
+            required
+          />
 
-            <label>Issue Date</label>
-            <input
-              type="date"
-              id="issueDate"
-              value={form.issueDate}
-              onChange={handleChange}
-              required
-            />
+          <label>Issue Date</label>
+          <input
+            type="date"
+            id="issueDate"
+            value={form.issueDate}
+            onChange={handleChange}
+            required
+          />
 
-            <button type="submit" className="btn">Upload</button>
-          </form>
-        </div>
+          <button type="submit" className="btn">Upload</button>
+        </form>
+      </div>
     </div>
   );
 };

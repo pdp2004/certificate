@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login.jsx';
 import Dashboard from './Dashboard.jsx';
-import VerifierDashboard from './VerifierDashboard .jsx';
+import VerifierDashboard from './VerifierDashboard.jsx';
+import ManageCertificates from './ManageCertificates.jsx';
 import Sidebar from './Sidebar';
 import CertificateUpload from './CertificateUpload.jsx';
 import About from './About.jsx';
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/login' element={<Login/>}/>
         <Route path='/upload' element={<CertificateUpload/>}/>
+        <Route path='/manage' element={<ManageCertificates/>}/>
         <Route path='/about' element={<About/>}/>
       </Routes>
     </Router>
