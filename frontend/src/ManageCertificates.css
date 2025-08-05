@@ -23,7 +23,7 @@
   }
   
   .manage-container input {
-    width: 100%;
+    width: fit-content;
     padding: 5px;
   }
   

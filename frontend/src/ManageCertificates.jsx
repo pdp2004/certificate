@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ManageCertificates.css";
+import { FaSave } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
+import { IoTrashBin } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
 
 const ManageCertificates = () => {
   const [certificates, setCertificates] = useState([]);
@@ -25,6 +29,17 @@ const ManageCertificates = () => {
     fetchCertificates();
   }, []);
 
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this certificate?")) return;
+
+    try {
+      await axios.delete(`http://localhost:3000/api/delete/${id}`);
+      setCertificates(certificates.filter(cert => cert._id !== id));
+    } catch (err) {
+      console.error("Delete failed", err);
+      alert("Failed to delete certificate.");
+    }
+  };
 
   const handleEdit = (cert) => {
     setEditingId(cert._id);
@@ -75,8 +90,8 @@ const ManageCertificates = () => {
                   <td><input name="grade" value={editForm.grade} onChange={handleChange} /></td>
                   <td><input name="issueDate" type="date" value={editForm.issueDate} onChange={handleChange} /></td>
                   <td>
-                    <button onClick={saveChanges} className="btn save">Save</button>
-                    <button onClick={() => setEditingId(null)} className="btn cancel">Cancel</button>
+                    <button onClick={saveChanges} className="btn save"><FaSave/></button>
+                    <button onClick={() => setEditingId(null)} className="btn cancel"><MdCancel/></button>
                   </td>
                 </>
               ) : (
@@ -86,7 +101,8 @@ const ManageCertificates = () => {
                   <td>{cert.grade}</td>
                   <td>{new Date(cert.issueDate).toLocaleDateString()}</td>
                   <td>
-                    <button onClick={() => handleEdit(cert)} className="btn edit">Edit</button>
+                    <button onClick={() => handleEdit(cert)} className="btn edit"><FaRegEdit/></button>
+                    <button onClick={() => handleDelete(cert._id)} className="btn delete"><IoTrashBin /></button>
                   </td>
                 </>
               )}

@@ -1,36 +1,30 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./VerifierDashboard.css";
 
 const VerifierDashboard = () => {
   const [certId, setCertId] = useState("");
   const [result, setResult] = useState(null);
 
-  // Mock certificates (simulate backend data)
-  const certificates = {
-    "CERT-1001": {
-      name: "John Doe",
-      course: "BCA",
-      grade: "A",
-      issueDate: "2025-05-20",
-    },
-    "CERT-1002": {
-      name: "John Doe",
-      course: "Cloud Computing",
-      grade: "A+",
-      issueDate: "2025-07-15",
-    },
-  };
-
-  const verifyCertificate = (e) => {
+  const verifyCertificate = async (e) => {
     e.preventDefault();
-    const cert = certificates[certId.trim()];
-    if (cert) {
-      setResult({
-        status: "valid",
-        message: "Certificate Verified",
-        data: cert,
-      });
-    } else {
+    try {
+      const res = await axios.get(`http://localhost:3000/api/certificate/${certId}`);
+      if (res.data && res.data.certId) {
+        setResult({
+          status: "valid",
+          message: "Certificate Verified",
+          data: res.data,
+        });
+      } else {
+        setResult({
+          status: "invalid",
+          message: "Certificate Not Found!",
+          data: null,
+        });
+      }
+    } catch (err) {
+      console.error("Verification error:", err);
       setResult({
         status: "invalid",
         message: "Certificate Not Found!",
@@ -39,10 +33,9 @@ const VerifierDashboard = () => {
     }
   };
 
+
   return (
     <div className="verifier-container">
-
-      {/* Main Content */}
       <div className="main">
         <h1>Verifier Dashboard</h1>
 
@@ -74,8 +67,8 @@ const VerifierDashboard = () => {
             <div id="resultDetails">
               {result.status === "valid" ? (
                 <>
-                  <p><b>Certificate ID:</b> {certId}</p>
-                  <p><b>Name:</b> {result.data.name}</p>
+                  <p><b>Certificate ID:</b> {result.data.certId}</p>
+                  <p><b>Name:</b> {result.data.studentName}</p>
                   <p><b>Course:</b> {result.data.course}</p>
                   <p><b>Grade:</b> {result.data.grade}</p>
                   <p><b>Issued On:</b> {result.data.issueDate}</p>
