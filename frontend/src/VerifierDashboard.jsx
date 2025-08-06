@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link} from 'react-router-dom';
+import { FaEye } from "react-icons/fa";
 import "./VerifierDashboard.css";
+
 
 const VerifierDashboard = () => {
   const [certId, setCertId] = useState("");
@@ -10,6 +13,7 @@ const VerifierDashboard = () => {
     e.preventDefault();
     try {
       const res = await axios.get(`http://localhost:3000/api/certificate/${certId}`);
+      // console.log(result.data);
       if (res.data && res.data.certId) {
         setResult({
           status: "valid",
@@ -71,10 +75,9 @@ const VerifierDashboard = () => {
                   <p><b>Name:</b> {result.data.studentName}</p>
                   <p><b>Course:</b> {result.data.course}</p>
                   <p><b>Grade:</b> {result.data.grade}</p>
-                  <p><b>Issued On:</b> {result.data.issueDate}</p>
-                  <p style={{ color: "green", fontWeight: "bold" }}>
-                    Verified on Blockchain
-                  </p>
+                  <p><b>Issued On:</b>{new Date(result.data.issueDate).toLocaleDateString()}</p>
+                  <p style={{ color: "green", fontWeight: "bold" }}></p>
+                  <Link to={`/view-certificate/${certId}`} target="_blank"><FaEye /></Link>
                 </>
               ) : (
                 <p style={{ color: "red" }}>

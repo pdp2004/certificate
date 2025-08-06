@@ -67,3 +67,14 @@ export const deleteCertificate = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
+
+
+export const viewCertificate = async (req, res) => {
+  try {
+    const cert = await Certificate.findOne({ certId: req.params.certId });
+    if (!cert) return res.status(404).json({ message: "Certificate not found" });
+    res.json(cert);
+  } catch (err) {
+    res.status(500).json({ message: "Server Error" });
+  }
+};
