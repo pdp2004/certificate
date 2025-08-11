@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import "./ViewCertificate.css"; // Basic styling only
+import { QRCodeCanvas } from "qrcode.react";
+
+import "./ViewCertificate.css";
 
 const ViewCertificate = () => {
   const { id } = useParams();
@@ -42,7 +44,7 @@ const ViewCertificate = () => {
         <>
           <div className="certificate" ref={certRef}>
             <div className="certificate-header">
-              <h1 style={{ color: "#0056b3", textAlign:"left"}}>ProofEdu</h1>
+              <h1 style={{ color: "#0056b3", textAlign: "left" }}>ProofEdu</h1>
               <h1>CERTIFICATE</h1>
               <h2>OF ACHIEVEMENT</h2>
               <p>This certificate is presented to</p>
@@ -64,7 +66,18 @@ const ViewCertificate = () => {
                 <p>Pardeep</p>
                 <p>Chief Organizer</p>
               </div>
-              <div className="seal">🏅</div>
+              <div className="seal">
+              <div className="qr-code">
+              <QRCodeCanvas
+                value={`http://localhost:5173/view-certificate/${id}`}
+                size={100}
+                fgColor="#000000"
+                bgColor="#ffffff"
+                level="H"
+              />
+              <p style={{ fontSize: "10px" }}>Scan to Verify</p>
+            </div>
+              </div>
               <div className="signature">
                 <p>__________________</p>
                 <p>Kanan</p>
